@@ -19,3 +19,6 @@ allure serve allure-results
 ```
 ## Screenshot
 These are the snapshot of the allure reports:
+
+
+![Screenshot_1](https://user-images.githubusercontent.com/71173675/154655298-2b884bee-fcff-4438-a3bb-1db2bd5652e1.png)
