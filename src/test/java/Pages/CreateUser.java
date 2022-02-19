@@ -2,6 +2,7 @@ package Pages;
 
 
 import Utilities.Utils;
+import com.github.javafaker.Faker;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ public class CreateUser {
     WebDriver driver;
     WebDriverWait wait;
     Utils utils;
+    Faker faker;
 
     public CreateUser(WebDriver driver) {
         this.driver = driver;
@@ -62,28 +64,34 @@ public class CreateUser {
         btnSignUp.click();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
-        inputEmail.sendKeys("johndoe68@test.test");
+
+        faker = new Faker();
+        String first = faker.name().firstName();
+        String fakeEmail = first.toLowerCase() + "@bs23assignment.test";
+        String last = faker.name().lastName();
+        String fakePhone = "0197" + (int) (Math.random() * (9999999 - 1000000 + 1) + 1000000);
+
+        inputEmail.sendKeys(fakeEmail);
         btnCreate.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.elementToBeClickable(btnRadio));
         btnRadio.click();
-        firstName.sendKeys("John");
-        lastName.sendKeys("Doe");
+        firstName.sendKeys(first);
+        lastName.sendKeys(last);
         pass.sendKeys("332211");
-        address.sendKeys("221B Baker Street");
-        city.sendKeys("Manhattan");
+        address.sendKeys(faker.address().streetAddress());
+        city.sendKeys(faker.address().cityName());
         Thread.sleep(3000);
         Select select = new Select(state);
         select.selectByValue(String.valueOf(4));
         postCode.sendKeys("20202");
-        phone.sendKeys("555444333");
+        phone.sendKeys(fakePhone);
         myAlias.clear();
         myAlias.sendKeys("Sherlock");
         btnSubmit.click();
         utils = new Utils(driver);
-        String email = "johndoe68@test.test";
         String password = "332211";
-        utils.inputJSONArray(email, password);
+        utils.inputJSONArray(fakeEmail, password);
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnSignOut));
         btnSignOut.click();
@@ -93,27 +101,33 @@ public class CreateUser {
         btnSignUp.click();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
-        inputEmail.sendKeys("janedoe68@test.test");
+
+        faker = new Faker();
+        String first = faker.name().firstName();
+        String fakeEmail = first.toLowerCase() + "@bs23assignment.test";
+        String last = faker.name().lastName();
+        String fakePhone = "0197" + (int) (Math.random() * (9999999 - 1000000 + 1) + 1000000);
+
+        inputEmail.sendKeys(fakeEmail);
         btnCreate.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.elementToBeClickable(btnRadioFemale));
         btnRadio.click();
-        firstName.sendKeys("Jane");
-        lastName.sendKeys("Doe");
+        firstName.sendKeys(first);
+        lastName.sendKeys(last);
         pass.sendKeys("332211");
-        address.sendKeys("221B Baker Street");
-        city.sendKeys("Downtown");
+        address.sendKeys(faker.address().streetAddress());
+        city.sendKeys(faker.address().cityName());
         Thread.sleep(3000);
         Select select = new Select(state);
         select.selectByValue(String.valueOf(3));
         postCode.sendKeys("30112");
-        phone.sendKeys("555444222");
+        phone.sendKeys(fakePhone);
         myAlias.clear();
         myAlias.sendKeys("Sherlock but female");
         utils = new Utils(driver);
-        String email = "janedoe68@test.test";
         String password = "332211";
-        utils.inputJSONArray(email, password);
+        utils.inputJSONArray(fakeEmail, password);
         btnSubmit.click();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnSignOut));

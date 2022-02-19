@@ -23,8 +23,9 @@ public class Run extends Setup {
     public void firstCycle() throws InterruptedException, IOException, ParseException {
         driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
         utils = new Utils(driver);
+        utils.readFromJSON(0);
         UserCycle userCycle = new UserCycle(driver);
-        userCycle.userCycleAll(utils.getEmailJSON(0), utils.getPasswordJSON(0));
+        userCycle.userCycleAll(utils.getEmail(), utils.getPassword());
     }
 
     @Test(priority = 3, description = "Creating second user")
@@ -38,7 +39,8 @@ public class Run extends Setup {
     public void secondCycle() throws IOException, ParseException, InterruptedException {
         driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
         utils = new Utils(driver);
+        utils.readFromJSON(1);
         UserCycle userCycle = new UserCycle(driver);
-        userCycle.userCycleAll(utils.getEmailJSON(1), utils.getPasswordJSON(1));
+        userCycle.userCycleAll(utils.getEmail(), utils.getPassword());
     }
 }

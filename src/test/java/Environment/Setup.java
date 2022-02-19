@@ -19,7 +19,7 @@ public class Setup {
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         ChromeOptions ops = new ChromeOptions();
-        ops.addArguments("--headless");
+        ops.addArguments("--headed");
         driver = new ChromeDriver(ops);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(180));
