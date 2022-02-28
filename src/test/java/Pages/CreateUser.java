@@ -32,10 +32,6 @@ public class CreateUser {
     WebElement inputEmail;
     @FindBy(id = "SubmitCreate")
     WebElement btnCreate;
-    @FindBy(id = "id_gender1")
-    WebElement btnRadio;
-    @FindBy(id = "id_gender2")
-    WebElement btnRadioFemale;
     @FindBy(id = "customer_firstname")
     WebElement firstName;
     @FindBy(id = "customer_lastname")
@@ -60,75 +56,36 @@ public class CreateUser {
     WebElement btnSignOut;
 
 
-    public void createU1() throws IOException, ParseException, InterruptedException {
+    public void registerUser() throws IOException, ParseException, InterruptedException {
         btnSignUp.click();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
 
         faker = new Faker();
         String first = faker.name().firstName();
-        String fakeEmail = first.toLowerCase() + "@bs23assignment.test";
         String last = faker.name().lastName();
-        String fakePhone = "0197" + (int) (Math.random() * (9999999 - 1000000 + 1) + 1000000);
+        String fakeEmail = first.toLowerCase() + last.toLowerCase() + "@bs23assignment.test";
+        String fakePhone = faker.phoneNumber().cellPhone();
+        String randomPassword = faker.internet().password();
+        String zipcode = "" + (int) (Math.random() * (99999 - 10000 + 1) + 10000);
 
         inputEmail.sendKeys(fakeEmail);
         btnCreate.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.elementToBeClickable(btnRadio));
-        btnRadio.click();
         firstName.sendKeys(first);
         lastName.sendKeys(last);
-        pass.sendKeys("332211");
+        pass.sendKeys(randomPassword);
         address.sendKeys(faker.address().streetAddress());
         city.sendKeys(faker.address().cityName());
         Thread.sleep(3000);
         Select select = new Select(state);
         select.selectByValue(String.valueOf(4));
-        postCode.sendKeys("20202");
+        postCode.sendKeys(zipcode);
         phone.sendKeys(fakePhone);
         myAlias.clear();
         myAlias.sendKeys("Sherlock");
         btnSubmit.click();
         utils = new Utils(driver);
-        String password = "332211";
-        utils.inputJSONArray(fakeEmail, password);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(btnSignOut));
-        btnSignOut.click();
-    }
-
-    public void createU2() throws IOException, ParseException, InterruptedException {
-        btnSignUp.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
-
-        faker = new Faker();
-        String first = faker.name().firstName();
-        String fakeEmail = first.toLowerCase() + "@bs23assignment.test";
-        String last = faker.name().lastName();
-        String fakePhone = "0197" + (int) (Math.random() * (9999999 - 1000000 + 1) + 1000000);
-
-        inputEmail.sendKeys(fakeEmail);
-        btnCreate.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.elementToBeClickable(btnRadioFemale));
-        btnRadio.click();
-        firstName.sendKeys(first);
-        lastName.sendKeys(last);
-        pass.sendKeys("332211");
-        address.sendKeys(faker.address().streetAddress());
-        city.sendKeys(faker.address().cityName());
-        Thread.sleep(3000);
-        Select select = new Select(state);
-        select.selectByValue(String.valueOf(3));
-        postCode.sendKeys("30112");
-        phone.sendKeys(fakePhone);
-        myAlias.clear();
-        myAlias.sendKeys("Sherlock but female");
-        utils = new Utils(driver);
-        String password = "332211";
-        utils.inputJSONArray(fakeEmail, password);
-        btnSubmit.click();
+        utils.inputJSONArray(fakeEmail, randomPassword);
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnSignOut));
         btnSignOut.click();
