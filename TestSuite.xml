@@ -2,7 +2,7 @@
 
     <test name="My Store Automation">
         <classes>
-            <class name="TestRunners.Run"/>
+            <class name="testrunner.Run"/>
         </classes>
     </test>
 

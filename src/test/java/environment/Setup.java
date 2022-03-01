@@ -1,6 +1,6 @@
-package Environment;
+package environment;
 
-import Utilities.Utils;
+import utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,7 +22,7 @@ public class Setup {
         ops.addArguments("--headed");
         driver = new ChromeDriver(ops);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(180));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
     }
 
     @AfterMethod

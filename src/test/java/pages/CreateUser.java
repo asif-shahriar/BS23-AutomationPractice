@@ -1,7 +1,7 @@
-package Pages;
+package pages;
 
 
-import Utilities.Utils;
+import utilities.Utils;
 import com.github.javafaker.Faker;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
@@ -58,7 +58,7 @@ public class CreateUser {
 
     public void registerUser() throws IOException, ParseException, InterruptedException {
         btnSignUp.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(80));
         wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
 
         faker = new Faker();
@@ -86,7 +86,6 @@ public class CreateUser {
         btnSubmit.click();
         utils = new Utils(driver);
         utils.inputJSONArray(fakeEmail, randomPassword);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnSignOut));
         btnSignOut.click();
     }

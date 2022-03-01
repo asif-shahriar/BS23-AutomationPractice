@@ -1,9 +1,9 @@
-package TestRunners;
+package testrunner;
 
-import Environment.Setup;
-import Pages.CreateUser;
-import Pages.UserCycle;
-import Utilities.Utils;
+import environment.Setup;
+import pages.CreateUser;
+import pages.ProductShopping;
+import utilities.Utils;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.Test;
 
@@ -21,8 +21,8 @@ public class Run extends Setup {
             driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
             utils = new Utils(driver);
             utils.readFromJSON(i);
-            UserCycle userCycle = new UserCycle(driver);
-            userCycle.userCycleAll(utils.getEmail(), utils.getPassword());
+            ProductShopping productShopping = new ProductShopping(driver);
+            productShopping.purchase(utils.getEmail(), utils.getPassword());
         }
     }
 }

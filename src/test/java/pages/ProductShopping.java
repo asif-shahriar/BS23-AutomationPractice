@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +12,11 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
-public class UserCycle {
+public class ProductShopping {
     WebDriver driver;
     WebDriverWait wait;
 
-    public UserCycle(WebDriver driver) {
+    public ProductShopping(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -63,7 +63,7 @@ public class UserCycle {
     WebElement signOut;
 
 
-    public void userCycleAll(String email, String password) throws InterruptedException {
+    public void purchase(String email, String password) throws InterruptedException {
         loginEmail.sendKeys(email);
         loginPass.sendKeys(password);
         btnLogin.click();
@@ -73,36 +73,29 @@ public class UserCycle {
         Thread.sleep(2000);
         actions.moveToElement(submenuCasualDress.get(1));
         actions.click().build().perform();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(80));
         wait.until(ExpectedConditions.elementToBeClickable(printDress));
         printDress.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnCart));
         btnCart.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnCross));
         btnCross.click();
         tshirt.get(1).click();
         filterColor.get(1).click();
         blueColor.get(1).click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnCart));
         btnCart.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(btnCheckOut));
         btnCheckOut.click();
         Thread.sleep(2000);
         btnCheckOut1.click();
         Thread.sleep(2000);
         btnCheckOut2.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(checkBox));
         checkBox.click();
         btnCheckOut3.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(payCheque));
         payCheque.click();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(confirmOrder));
         confirmOrder.click();
         String s = status.getText();
